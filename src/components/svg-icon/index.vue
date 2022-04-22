@@ -19,5 +19,7 @@ defineProps({
   height: 1em;
   fill: currentColor;
   overflow: hidden;
+  margin-right: 10px;
+  vertical-align: middle;
 }
 </style>

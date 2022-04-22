@@ -5,6 +5,7 @@
     >
       <SidebarItemLink v-if="theOnlyOneChild.meta" :to="resolvePath(theOnlyOneChild.path)">
         <a-menu-item :key="resolvePath(theOnlyOneChild.path)">
+          <svg-icon name="dashboard" />
           <template v-if="theOnlyOneChild.meta.title">
             {{ theOnlyOneChild.meta.title }}
           </template>
@@ -12,7 +13,9 @@
       </SidebarItemLink>
     </template>
     <a-sub-menu v-else :key="resolvePath(item.path)">
+      
       <template #title>
+        <svg-icon name="dashboard" />
         <span v-if="item.meta && item.meta.title">{{ item.meta.title }}</span>
       </template>
       <template v-if="item.children">
