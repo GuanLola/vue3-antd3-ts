@@ -147,6 +147,9 @@ const onFinishFailed = (errorInfo: any) => {
     min-width: 328px;
     max-width: 500px;
     margin: 100px auto 0;
+    h1 {
+      text-align: center;
+    }
     .login-form-wrap {
       display: flex;
       align-items: center;
