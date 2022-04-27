@@ -13,6 +13,11 @@ import 'virtual:svg-icons-register'
 
 import '@/assets/global.less'
 
+if (process.env.NODE_ENV === 'production') {
+  const { mockXHR } = require('../mock')
+  mockXHR()
+}
+
 const app = createApp(App)
 
 app.use(store).use(router).use(Antd)
