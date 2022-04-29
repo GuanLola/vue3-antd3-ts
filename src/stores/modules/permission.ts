@@ -46,7 +46,7 @@ export const usePermissionStore = defineStore({
   },
   actions: {
     setRoutes(roles: string[]) {
-      let accessedRoutes
+      let accessedRoutes: RouteRecordRaw[];
       if (roles.includes("admin")) {
         accessedRoutes = asyncRoutes
       } else {

@@ -1,7 +1,7 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 const Layout = () => import('@/layout/index.vue')
 
-export const constantRoutes = [
+export const constantRoutes: RouteRecordRaw[] = [
   {
     path: '/login',
     name: 'login',
@@ -30,7 +30,7 @@ export const constantRoutes = [
   }
 ]
 
-export const asyncRoutes = [
+export const asyncRoutes: RouteRecordRaw[] = [
   {
     path: '/permission',
     name: 'Permission',
