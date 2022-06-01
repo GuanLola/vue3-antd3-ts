@@ -1,21 +1,9 @@
 <template>
-  <div class="box">
-    <span class="text">
-      你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好
-    </span>
-    <span class="expand">展开</span>
-  </div>
+  <div>dashboard</div>
 </template>
 
-<style lang="scss" scoped>
-.box {
-  width: 500px;
-  .text {
-    word-wrap: break-word;
-    word-break: break-all;
-  }
-  .expand {
-    
-  }
-}
+<script setup>
+import {} from 'vue'
+</script>
+<style lang='scss' scoped>
 </style>

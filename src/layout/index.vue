@@ -1,7 +1,7 @@
 <template>
   <div :class="classObj">
     <SideBar />
-    <div class="main-container">
+    <div class="main-container" :style="{ marginLeft: collapsed ? '80px' : '220px' }">
       <NavigationBar />
       <AppMain />
     </div>
@@ -11,6 +11,9 @@
 <script lang="ts" setup>
 import { computed } from "vue";
 import { AppMain, SideBar, NavigationBar } from "./components";
+import { useMenuStore } from '@/stores/modules/menu';
+
+const collapsed = computed(() => useMenuStore().collapsed)
 
 const classObj = computed(() => {
   return {};

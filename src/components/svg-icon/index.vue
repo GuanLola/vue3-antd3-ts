@@ -20,6 +20,7 @@ defineProps({
   fill: currentColor;
   overflow: hidden;
   margin-right: 10px;
+  margin-top: -3px;
   vertical-align: middle;
 }
 </style>

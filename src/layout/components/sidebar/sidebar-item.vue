@@ -1,21 +1,28 @@
 <template>
-  <div v-if="!item.mata || !item.meata.hidden">
+  <template v-if="!item.mata || !item.meata.hidden">
     <template
       v-if="!alwaysShowRootMenu && theOnlyOneChild && !theOnlyOneChild.children"
     >
       <SidebarItemLink v-if="theOnlyOneChild.meta" :to="resolvePath(theOnlyOneChild.path)">
         <a-menu-item :key="resolvePath(theOnlyOneChild.path)">
-          <svg-icon v-if="theOnlyOneChild.meta && theOnlyOneChild.meta.icon" :name="theOnlyOneChild.meta.icon" />
-          <template v-if="theOnlyOneChild.meta.title">
-            {{ theOnlyOneChild.meta.title }}
+          <template #icon>
+            <PieChartOutlined />
           </template>
+          <!-- <svg-icon v-if="theOnlyOneChild.meta && theOnlyOneChild.meta.icon" :name="theOnlyOneChild.meta.icon" /> -->
+          <span v-if="theOnlyOneChild.meta.title">
+            {{ theOnlyOneChild.meta.title }}
+          </span>
         </a-menu-item>
       </SidebarItemLink>
     </template>
     <a-sub-menu v-else :key="resolvePath(item.path)">
+      <template #icon>
+        <PieChartOutlined />
+      </template>
+      
       
       <template #title>
-        <svg-icon :name="item.meta.icon" />
+        <!-- <svg-icon :name="item.meta.icon" /> -->
         <span v-if="item.meta && item.meta.title">{{ item.meta.title }}</span>
       </template>
       <template v-if="item.children">
@@ -27,7 +34,7 @@
         />
       </template>
     </a-sub-menu>
-  </div>
+  </template>
 </template>
 
 <script lang="ts" setup>
@@ -36,6 +43,7 @@ import { isExternal } from "@/utils/validate";
 import { computed, PropType } from "vue";
 import SidebarItemLink from './sidebar-item-link.vue'
 import { RouteRecordRaw } from 'vue-router';
+import { PieChartOutlined } from '@ant-design/icons-vue'
 
 const props = defineProps({
   item: {

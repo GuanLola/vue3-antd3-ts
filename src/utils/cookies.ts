@@ -16,4 +16,19 @@ class token {
   }
 }
 
-export { token };
+class collapsed {
+  // set collapsed
+  static setCollapsed(collapsed: boolean) {
+    Cookies.set(Keys.collapsed, collapsed.toString());
+  }
+  // get collapsed
+  static getCollapsed() {
+    return !!Cookies.get(Keys.collapsed);
+  }
+  // remove collapsed
+  static removeCollapsed() {
+    Cookies.remove(Keys.collapsed);
+  }
+}
+
+export { token, collapsed };

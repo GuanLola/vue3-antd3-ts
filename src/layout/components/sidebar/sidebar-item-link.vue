@@ -3,9 +3,9 @@
   <a v-if="isExternal(to)" :href="to" target="_blank" rel="noopener">
     <slot />
   </a>
-  <div v-else @click="push">
+  <template v-else @click="push">
     <slot />
-  </div>
+  </template>
 </template>
 
 <script lang="ts" setup>

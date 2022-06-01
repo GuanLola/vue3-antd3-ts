@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import table from './modules/table' // table modules
 const Layout = () => import('@/layout/index.vue')
 
 export const constantRoutes: RouteRecordRaw[] = [
@@ -62,10 +63,11 @@ export const asyncRoutes: RouteRecordRaw[] = [
       }
     ]
   },
+  // 列表页
+  { ...table },
   {
     path: '/:pathMatch(.*)',
-    redirect: '/404',
-    hidden: true
+    redirect: '/404'
   }
 ]
 
