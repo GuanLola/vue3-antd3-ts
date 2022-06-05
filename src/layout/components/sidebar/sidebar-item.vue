@@ -4,11 +4,8 @@
       v-if="!alwaysShowRootMenu && theOnlyOneChild && !theOnlyOneChild.children"
     >
       <SidebarItemLink v-if="theOnlyOneChild.meta" :to="resolvePath(theOnlyOneChild.path)">
-        <a-menu-item :key="resolvePath(theOnlyOneChild.path)">
-          <template #icon>
-            <PieChartOutlined />
-          </template>
-          <!-- <svg-icon v-if="theOnlyOneChild.meta && theOnlyOneChild.meta.icon" :name="theOnlyOneChild.meta.icon" /> -->
+        <a-menu-item :key="resolvePath(theOnlyOneChild.path)" @click="push(resolvePath(theOnlyOneChild.path))">
+          <component v-if="theOnlyOneChild.path" :is="proxy.$antIcons[theOnlyOneChild.meta.icon]" />
           <span v-if="theOnlyOneChild.meta.title">
             {{ theOnlyOneChild.meta.title }}
           </span>
@@ -16,13 +13,10 @@
       </SidebarItemLink>
     </template>
     <a-sub-menu v-else :key="resolvePath(item.path)">
-      <template #icon>
-        <PieChartOutlined />
-      </template>
       
-      
+
       <template #title>
-        <!-- <svg-icon :name="item.meta.icon" /> -->
+        <component :is="proxy.$antIcons[item.meta.icon]" />
         <span v-if="item.meta && item.meta.title">{{ item.meta.title }}</span>
       </template>
       <template v-if="item.children">
@@ -42,8 +36,12 @@ import path from 'path'
 import { isExternal } from "@/utils/validate";
 import { computed, PropType } from "vue";
 import SidebarItemLink from './sidebar-item-link.vue'
-import { RouteRecordRaw } from 'vue-router';
-import { PieChartOutlined } from '@ant-design/icons-vue'
+import { RouteRecordRaw, useRouter } from 'vue-router';
+import { PieChartOutlined } from '@ant-design/icons-vue';
+import { getCurrentInstance } from 'vue';
+
+const { proxy } = getCurrentInstance();
+
 
 const props = defineProps({
   item: {
@@ -94,8 +92,15 @@ const resolvePath = (routePath) => {
   if (isExternal(props.basePath)) {
     return props.basePath;
   }
-
+  
   return path.resolve(props.basePath, routePath);
 };
+
+const router = useRouter()
+const push = (path) => {
+  router.push(path).catch(err => {
+    console.log(err);
+  });
+}
 </script>
 <style lang="scss" scoped></style>

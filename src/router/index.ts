@@ -20,7 +20,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: 'Dashboard',
         meta: {
           title: '首页',
-          icon: 'dashboard'
+          icon: 'HomeOutlined'
         }
       }
     ]
@@ -39,7 +39,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
     component: Layout,
     meta: {
       title: '权限管理',
-      icon: 'lock',
+      icon: 'HddOutlined',
       roles: ['admin', 'editor'], // you can set roles in root nav
       alwaysShow: true // will always show the root menu
     },

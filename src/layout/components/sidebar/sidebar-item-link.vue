@@ -3,7 +3,7 @@
   <a v-if="isExternal(to)" :href="to" target="_blank" rel="noopener">
     <slot />
   </a>
-  <template v-else @click="push">
+  <template v-else>
     <slot />
   </template>
 </template>

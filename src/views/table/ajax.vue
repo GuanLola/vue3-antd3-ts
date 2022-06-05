@@ -44,12 +44,8 @@ const columns = reactive([
 ]) 
 
 const queryData = (params) => {
-  console.log(params)
   return axios.get('https://randomuser.me/api?noinfo', { params })
 }
-
-const res = axios.get('http://qdht.youpinyun.net/api/index/index')
-console.log('res==>', res)
 
 const {
   data: dataSource,
@@ -64,14 +60,6 @@ const {
     pageSizeKey: 'results'
   }
 })
-
-console.log(usePagination(queryData, {
-  formatResult: res => res.data.results,
-  pagination: {
-    currentKey: 'page',
-    pageSizeKey: 'results'
-  }
-}))
 
 const pagination = computed(() => ({
   total: 200,

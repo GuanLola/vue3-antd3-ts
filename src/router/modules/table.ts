@@ -7,7 +7,7 @@ export default {
   component: Layout,
   meta: {
     title: '列表页',
-    icon: 'table',
+    icon: 'TableOutlined',
     roles: ['admin', 'editor'],
     alwaysShow: true
   },
