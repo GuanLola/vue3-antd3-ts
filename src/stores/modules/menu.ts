@@ -2,6 +2,8 @@ import store from '@/stores'
 import { defineStore } from "pinia"
 import { collapsed } from "@/utils/cookies"
 
+console.log(collapsed.getCollapsed())
+
 export const useMenuStore = defineStore({
   id: "menu",
   state: () => {

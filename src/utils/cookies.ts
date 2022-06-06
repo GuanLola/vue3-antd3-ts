@@ -23,7 +23,7 @@ class collapsed {
   }
   // get collapsed
   static getCollapsed() {
-    return !!Cookies.get(Keys.collapsed);
+    return !Cookies.get(Keys.collapsed);
   }
   // remove collapsed
   static removeCollapsed() {

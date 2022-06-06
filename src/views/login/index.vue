@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="form">
-      <h1>Login</h1>
+      <h1>Welcome to WE</h1>
       <a-form
         ref="formRef"
         :model="form"
@@ -10,13 +10,13 @@
         @validate="handleValidate"
         @finishFailed="onFinishFailed"
       >
-        <a-form-item name="username">
+        <a-form-item name="phone">
           <a-input
-            v-model:value="form.username"
+            v-model:value="form.phone"
             :autocomplete="'off'"
             :autofocus="true"
-            :placeholder="'Username: admin or user'"
-            name="username"
+            :placeholder="'Phone Number'"
+            name="phone"
             autofocus
           >
             <template #prefix>
@@ -48,7 +48,9 @@
         </div>
 
         <a-form-item>
-          <a-button type="primary" html-type="submit" block> Login </a-button>
+          <a-button type="primary" html-type="submit" block> Login in </a-button>
+
+          <a-button class="sign-up-btn" block> Sign up </a-button>
         </a-form-item>
       </a-form>
     </div>
@@ -62,11 +64,12 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons-vue";
 import { reactive, ref } from "vue";
 import type { Rule } from "ant-design-vue/es/form";
 import type { FormInstance } from "ant-design-vue";
+import { Users } from "@/api/login";
 
 const router = useRouter();
 
 interface FormState {
-  username: string;
+  phone: string;
   password: string;
   remember: boolean;
 }
@@ -74,12 +77,12 @@ interface FormState {
 const formRef = ref<FormInstance>();
 
 const form = reactive<FormState>({
-  username: "",
+  phone: "",
   password: "",
   remember: false
 });
 
-let validateUsername = async (_rule: Rule, value: string) => {
+let validatePhone = async (_rule: Rule, value: string) => {
   if (!value) {
     return Promise.reject("Username is required");
   }
@@ -94,10 +97,10 @@ let validatePassword = async (_rule: Rule, value: string) => {
 };
 
 const rules: Record<string, Rule[]> = {
-  username: [
+  phone: [
     {
       required: true,
-      validator: validateUsername,
+      validator: validatePhone,
       trigger: "change",
     },
   ],
@@ -121,17 +124,21 @@ const handleLogin = () => {
 
 const onFinish = (values: FormState) => {
   console.log("Success:", values);
-  handleLogin();
+  // handleLogin();
+  Users.register(values).then(res => {
+    console.log(res);
+  });
 };
 
 const handleValidate = (...args: any[]) => {
-  console.log("Validate:", args);
+  // console.log("Validate:", args);
 };
 
 const onFinishFailed = (errorInfo: any) => {
   console.log("Failed:", errorInfo);
 };
 </script>
+
 <style lang="less" scoped>
 .container {
   display: flex;
@@ -156,6 +163,11 @@ const onFinishFailed = (errorInfo: any) => {
       justify-content: space-between;
       margin: 20px 0 10px;
     }
+  }
+
+  // sign up button
+  .sign-up-btn {
+    margin-top: 5px;
   }
 }
 </style>

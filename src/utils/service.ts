@@ -24,14 +24,12 @@ function createService() {
         return Promise.reject(new Error("非本系统的接口"));
       } else {
         switch (code) {
-          case 0:
-            // code === 0 代表没有错误
-            return apiData;
-          case 20000:
+          case 200:
+          case 400:
             // code === 20000 代表没有错误
             return apiData;
           default:
-            // 不是正确的 code
+            // no right code
             console.error(apiData.msg || "Error");
             return Promise.reject(new Error("Error"));
         }
@@ -97,7 +95,7 @@ function createRequestFunction(service: AxiosInstance) {
       },
       timeout: 5000,
       baseURL:
-        "https://vue-typescript-admin-mock-server-armour.vercel.app/mock-api/v1",
+        "http://localhost:3001",
       data: {},
     };
     return service(Object.assign(configDefault, config));
