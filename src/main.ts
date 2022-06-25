@@ -30,4 +30,6 @@ app.config.globalProperties.$antIcons = antIcons // 挂在vue实例上
 app.use(store).use(router).use(Antd)
 loadSvg(app)
 
+app.config.globalProperties.$httpUrl = 'https://www.baidu.com'
+
 app.mount('#app')

@@ -2,14 +2,11 @@
   <div class="user-container">
     <div class="main">
       <h1 class="main-title">Welcome to WE</h1>
-      <div class="normal-title">
-        <a :class="classObj('login')" @click="changeActive('login')">login</a>
-        <b>·</b>
-        <a :class="classObj('register')" @click="changeActive('register')">register</a>
-      </div>
-      <Login />
+      <!-- <div class="normal-title">
+        <a :class="classObj('login')" @click="changeActive('login')">手机登录</a>
+      </div> -->
+      <Login v-if="active.type === 'login'" />
     </div>
-    
   </div>
 </template>
 
@@ -40,8 +37,13 @@ const changeActive = (type: string) => {
   align-items: center;
   flex-direction: column;
   height: 100vh;
+  
+  
   .main {
     width: 340px;
+    border-radius: 5px;
+    padding: 50px 20px;
+
     h1.main-title {
       text-align: center;
     }
