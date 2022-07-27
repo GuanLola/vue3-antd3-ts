@@ -5,6 +5,7 @@ import { token } from "@/utils/cookies";
 interface IUserState {
   token: string;
   roles: string[];
+  username: string;
 }
 
 export const useUserStore = defineStore({
@@ -13,6 +14,7 @@ export const useUserStore = defineStore({
     return {
       token: token.getToken() || "",
       roles: [],
+      username: '🌍 地球人'
     };
   },
   actions: {
@@ -26,7 +28,6 @@ export const useUserStore = defineStore({
       token.removeToken();
       window.location.reload();
     },
-    // get user info
     getInfo() {
       return new Promise((resolve, reject) => {
         this.roles = ["admin"];

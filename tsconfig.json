@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "es6",
     "module": "esnext",
     "strict": true,
     "jsx": "preserve",
@@ -15,8 +15,7 @@
     "baseUrl": ".",
     "types": [
       "node",
-      "webpack-env",
-      "element-plus/global", // element-plus 的 volar 插件支持
+      "webpack-env"
     ],
     "paths": {
       "@/*": [
@@ -37,6 +36,10 @@
     "src/router/index.ts"
   ],
   "exclude": [
-    "node_modules"
-  ]
+    "node_modules",
+    "dist"
+  ],
+  "vueCompilerOptions": {
+    "experimentalCompatMode": 2
+  }
 }

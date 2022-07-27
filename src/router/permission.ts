@@ -5,6 +5,7 @@ import { token } from "@/utils/cookies";
 import { whiteList } from "@/config/white-list";
 import { useUserStoreHook } from "@/stores/modules/user";
 import { usePermissionStoreHook } from "@/stores/modules/permission";
+import { loading } from '@/utils/loading'
 
 const userStore = useUserStoreHook()
 const permissionStore = usePermissionStoreHook()
@@ -13,6 +14,10 @@ NProgress.configure({ showSpinner: false });
 
 router.beforeEach(async(to, from, next) => {
   NProgress.start();
+  if (!window.existLoading) {
+    loading.show()
+    window.existLoading = true
+  }
   if (token.getToken()) {
     if (to.path === "/login") {
       next({ path: "/" });
@@ -42,5 +47,8 @@ router.beforeEach(async(to, from, next) => {
 });
 
 router.afterEach(() => {
+  if (window.existLoading) {
+    loading.hide()
+  }
   NProgress.done();
 });

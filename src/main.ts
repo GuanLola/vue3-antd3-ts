@@ -31,5 +31,7 @@ app.use(store).use(router).use(Antd)
 loadSvg(app)
 
 app.config.globalProperties.$httpUrl = 'https://www.baidu.com'
+// const { proxy } = getCurrentInstance()
+// console.log(proxy.$httpUrl)
 
 app.mount('#app')
