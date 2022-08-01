@@ -1,16 +1,28 @@
 <template>
-  <svg class="svg-icon" aria-hidden="true">
+  <svg class="svg-icon" aria-hidden="true" :style="iconStyle">
     <use :href="`#${name}`" />
   </svg>
 </template>
 
 <script lang="ts" setup>
-defineProps({
-  name: {
-    type: String,
-    required: true
+import { computed } from "vue"
+
+interface Props {
+    name: string,
+    color: string
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  name: '',
+  color: '#000'
+})
+
+const iconStyle = computed(() => {
+  return {
+    color: props.color
   }
 })
+
 </script>
 
 <style lang="scss" scoped>

@@ -14,8 +14,8 @@
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
-      "node",
-      "webpack-env"
+      "ant-design-vue/global",
+      "vite/client"
     ],
     "paths": {
       "@/*": [

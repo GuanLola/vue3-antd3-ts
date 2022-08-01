@@ -6,8 +6,8 @@
           <div class="welcome suspension">
             <img :src="headerSvg" alt="" class="welcome-img" />
             <div class="welcome-text">
-              <div class="welcome-title"></div>
-              <div class="welcome-note"></div>
+              <div class="welcome-title">{{ useUser.username + t('utils.comma') }}</div>
+              <div class="welcome-note">{{ t('dashboard.join us') }}</div>
             </div>
           </div>
         </a-col>
@@ -17,8 +17,15 @@
 </template>
 
 <script setup>
-import {} from 'vue'
 import headerSvg from '@/assets/icons/advertisement.svg'
+import { useI18n } from 'vue-i18n'
+import { loadLang } from '@/lang/index'
+import { useUserStore } from '@/stores/modules/user'
+
+const { t } = useI18n()
+
+const useUser = useUserStore()
+
 </script>
 <style lang='scss' scoped>
 </style>
