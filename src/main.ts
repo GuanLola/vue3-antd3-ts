@@ -7,6 +7,8 @@ import '@/router/permission'
 import App from './App.vue'
 import router from './router'
 
+import '@/styles/base.scss'
+
 import { loadLang } from '@/lang/index'
 
 // global svg icon

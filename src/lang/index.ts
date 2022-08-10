@@ -23,8 +23,6 @@ export async function loadLang(app: App) {
 
   const lang = await import(`./global-${locale}.ts`)
   const message = lang.default ?? {}
-  
-  console.log('>>>', locale)
 
   if (locale == 'zh-cn') {
     assignLocale[locale].push(getLangFileMessage(import.meta.globEager('./pages/zh-cn/**/*.ts'), locale))
@@ -39,16 +37,12 @@ export async function loadLang(app: App) {
   // 合并语言包(含element-puls、页面语言包)
   Object.assign(messages[locale], ...assignLocale[locale])
 
-  console.log(messages)
-
   i18n = createI18n({
     locale,
     legacy: false,
     globalInjection: true,
     messages
   })
-
-  console.log('i18n', i18n)
 
   app.use(i18n)
   return i18n

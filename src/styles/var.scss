@@ -1,0 +1,20 @@
+/*
+全局主题颜色定义
+直接使用css变量而非scss变量方便动态修改
+
+示例：动态修改主题色为红色
+import { useCssVar } from '@vueuse/core'
+const el = ref(null)
+const color = useCssVar('--color-primary', el)
+color.value = 'red
+
+简便写法 useCssVar('--color-primary', ref(null)).value = '64px'
+*/
+
+:root {
+  /* 无彩色 */
+  --color-text-primary: #303133; // 主要文本
+
+  /* 主色辅助色 */
+  --color-primary-sub-0: #3f6ad8;
+}

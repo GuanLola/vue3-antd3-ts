@@ -14,7 +14,7 @@ export const useUserStore = defineStore({
     return {
       token: token.getToken() || "",
       roles: [],
-      username: '🌍 地球人'
+      username: 'Admin'
     };
   },
   actions: {

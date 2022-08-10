@@ -25,7 +25,7 @@ const key = computed(() => {
   width: 100%;
   position: relative;
   overflow: hidden;
-  padding: 10px;
+  padding: 16px;
 }
 
 .fixed-header + .app-main {
