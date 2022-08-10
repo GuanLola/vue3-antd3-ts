@@ -11,6 +11,14 @@
             </div>
           </div>
         </a-col>
+        <a-col :lg="6" class="hidden-md-and-down">
+          <div class="working">
+            <img class="working-coffee" :src="coffeeSvg" alt="" />
+            <div class="working-text">
+              {{ t('dashboard.You have worked today') }}
+            </div>
+          </div>
+        </a-col>
       </a-row>
     </div>
   </div>
@@ -18,6 +26,7 @@
 
 <script setup>
 import headerSvg from '@/assets/icons/advertisement.svg'
+import coffeeSvg from '@/assets/icons/coffee.svg'
 import { useI18n } from 'vue-i18n'
 import { loadLang } from '@/lang/index'
 import { useUserStore } from '@/stores/modules/user'
