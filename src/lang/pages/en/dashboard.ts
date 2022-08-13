@@ -6,5 +6,11 @@ export default {
   'minute': 'minute',
   'second': 'second',
   'Continue to work': 'Continue to work',
-  'Have a bit of rest': 'Have a bit of rest'
+  'Have a bit of rest': 'Have a bit of rest',
+
+  // panel
+  'Member registration': 'Member registrations',
+  'Number of attachments Uploaded': 'Attachment Uploads',
+  'Total number of members': 'Total number of members',
+  'Number of installed plug-ins': 'Number of installed plug-ins',
 }

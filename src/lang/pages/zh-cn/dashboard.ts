@@ -6,5 +6,11 @@ export default {
   'minute': '分',
   'second': '秒',
   'Continue to work': '继续工作',
-  'Have a bit of rest': '休息片刻'
+  'Have a bit of rest': '休息片刻',
+
+  // panel
+  'Member registration': '会员注册量',
+  'Number of attachments Uploaded': '附件上传量',
+  'Total number of members': '会员总数',
+  'Number of installed plug-ins': '已装插件数',
 }

@@ -79,3 +79,12 @@ export const formatSeconds = (seconds: number) => {
 
   return result
 }
+
+/* 加载网络css文件 */
+export function loadCss(url: string) {
+  const link = document.createElement('link')
+  link.rel = 'stylesheet'
+  link.href = url
+  link.crossOrigin = 'anonymous'
+  document.getElementsByTagName('head')[0].appendChild(link)
+}

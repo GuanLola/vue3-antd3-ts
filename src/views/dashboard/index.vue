@@ -24,10 +24,40 @@
         </a-col>
       </a-row>
     </div>
+
+    <div class="small-panel-box">
+      <a-row :gutter="24">
+        <a-col v-for="item in state.panelArray" :xs="24" :sm="24" :md="24" :lg="24" :xl="6" :xxl="6" :xxxl="6">
+          <div class="small-panel suspension">
+            <div class="small-panel-title">{{ item.name }}</div>
+            
+            <div class="small-panel-content">
+              <div class="content-left">
+                <span class="icon-span">
+                  <i :class="iconClass(item.icon)"></i>
+                </span>
+                <span class="user_reg_number">{{ filterNum(item.num) }}</span>
+              </div>
+              <div class="content-right">+{{ item.percent }}%</div>
+            </div>
+          </div>
+        </a-col>
+      </a-row>
+    </div>
+
+    <div class="growth-chart">
+      <a-row :gutter="24">
+        <a-col class="lg-mb-20" :xs="24" :sm="24" :md="12" :lg="9">
+          <a-card title="会员增长情况">
+            <div class="user-growth-chart" :ref="chartRefs.set"></div>
+          </a-card>
+        </a-col>
+      </a-row>
+    </div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import headerSvg from '@/assets/icons/advertisement.svg'
 import coffeeSvg from '@/assets/icons/coffee.svg'
 import { useI18n } from 'vue-i18n'
@@ -37,24 +67,68 @@ import { getGreet } from '@/utils/common.ts'
 import { reactive, onMounted } from 'vue'
 import { Local } from '@/utils/storage.ts'
 import { WORKING_TIME } from '@/stores/constant/cacheKey.ts'
-import moment from 'moment'
 import { start } from 'nprogress'
+import moment from 'moment'
+import { useTemplateRefsList } from '@vueuse/core'
+import * as echarts from 'echarts'
+import { nextTick } from 'process'
+
+const chartRefs = useTemplateRefsList<HTMLDivElement>()
 
 var workTimer
 
 const { t } = useI18n()
+
 const d = new Date()
 
 const useUser = useUserStore()
 
 const state = reactive({
   workingTimeFormat: '',
-  pauseWork: false
+  pauseWork: false,
+  panelArray: [
+    {
+      name: t('dashboard.Member registration'),
+      num: 5456,
+      percent: 14,
+      icon: 'fa-line-chart'
+    },
+    {
+      name: t('dashboard.Number of attachments Uploaded'),
+      num: 1234,
+      percent: 50,
+      icon: 'fa-file-text'
+    },
+    {
+      name: t('dashboard.Total number of members'),
+      num: 9486,
+      percent: 28,
+      icon: 'fa-user'
+    },
+    {
+      name: t('dashboard.Number of installed plug-ins'),
+      num: 875,
+      percent: 88,
+      icon: 'fa-object-group'
+    }
+  ],
+  charts: []
 })
 
 onMounted(() => {
   startWork()
+  initUserGrowthChart()
+  window.addEventListener('resize', echartsResize)
 })
+
+/* 在div显示后手动条用resize调整尺寸 -> 改变图表尺寸，在容器大小发生改变时需要手动调用。 */
+const echartsResize = () => {
+  nextTick(() => {
+    for (const key in state.charts) {
+      state.charts[key].resize()
+    }
+  })
+}
 
 const startWork = () => {
   const workingTime = Local.get(WORKING_TIME) || { date: '', startTime: 0, pauseTime: 0, startPauseTime: 0 }
@@ -116,6 +190,62 @@ const onChangeWorkState = () => {
     clearInterval(workTimer)
     state.pauseWork = true
   }
+}
+
+const filterNum = (val) => {
+  return Number(val).toLocaleString()
+}
+
+const iconClass = (icon) => {
+  let obj = {
+    fa: true
+  }
+  obj[icon] = true
+  return obj
+}
+
+const initUserGrowthChart = () => {
+  const userGrowthChart = echarts.init(chartRefs.value[0] as HTMLElement)
+
+  const option = {
+    grid: {
+      top: 0,
+      right: 0,
+      bottom: 20,
+      left: 0
+    },
+    xAxis: {
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    },
+    yAxis: {},
+    legend: {
+      data: ['访问量', '注册量']
+    },
+    series: [
+      {
+        name: '访问量',
+        data: [100, 160, 280, 230, 190, 200, 480],
+        type: 'line',
+        smooth: true,
+        areaStyle: {
+          color: '#8595F4'
+        }
+      },
+      {
+        name: '注册量',
+        data: [45, 180, 146, 99, 210, 127, 288],
+        type: 'line',
+        smooth: true,
+        areaStyle: {
+          color: '#F48595',
+          opacity: 0.5
+        }
+      }
+    ]
+  }
+
+  userGrowthChart.setOption(option)
+  state.charts.push(userGrowthChart)
 }
 
 </script>
@@ -207,5 +337,64 @@ const onChangeWorkState = () => {
       top: 0px;
     }
   }
+}
+
+@media screen and (max-width: 1000px) {
+  .working {
+    display: none;
+  }
+}
+
+.small-panel-box {
+  margin-top: 20px;
+
+  .icon-span {
+    font-size: 20px;
+    color: #8595F4;
+    margin-right: 10px;
+  }
+
+  .small-panel {
+    background-color: #e9edf2;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: var(--border-radius-base);
+    transition: all 0.3s ease;
+
+    &.suspension {
+      &:hover {
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 0 14px 24px rgba(0, 0, 0, 0.2);
+        border-radius: 6px;
+      }
+    }
+
+    .small-panel-title {
+      color: #92969a;
+      font-size: 15px;
+    }
+
+    .small-panel-content {
+      display: flex;
+      align-items: flex-end;
+      margin-top: 20px;
+      color: #2c3f5d;
+
+      .content-left {
+        font-size: 24px;
+      }
+
+      .content-right {
+        font-size: 18px;
+        margin-left: auto;
+      }
+    }
+  }
+
+  
+}
+
+.user-growth-chart {
+  height: 260px;
 }
 </style>
