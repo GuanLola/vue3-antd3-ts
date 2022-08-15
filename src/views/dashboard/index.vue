@@ -215,15 +215,23 @@ const initUserGrowthChart = () => {
       left: 0
     },
     xAxis: {
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      data: [
+        t('dashboard.Monday'),
+        t('dashboard.Tuesday'),
+        t('dashboard.Wednesday'),
+        t('dashboard.Thursday'),
+        t('dashboard.Friday'),
+        t('dashboard.Saturday'),
+        t('dashboard.Sunday')
+      ]
     },
     yAxis: {},
     legend: {
-      data: ['访问量', '注册量']
+      data: [t('dashboard.Visits'), t('dashboard.Registration volume')]
     },
     series: [
       {
-        name: '访问量',
+        name: t('dashboard.Visits'),
         data: [100, 160, 280, 230, 190, 200, 480],
         type: 'line',
         smooth: true,
@@ -232,7 +240,7 @@ const initUserGrowthChart = () => {
         }
       },
       {
-        name: '注册量',
+        name: t('dashboard.Registration volume'),
         data: [45, 180, 146, 99, 210, 127, 288],
         type: 'line',
         smooth: true,

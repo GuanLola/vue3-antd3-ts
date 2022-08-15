@@ -13,4 +13,16 @@ export default {
   'Number of attachments Uploaded': 'Attachment Uploads',
   'Total number of members': 'Total number of members',
   'Number of installed plug-ins': 'Number of installed plug-ins',
+
+  // week
+  Monday: 'Monday',
+  Tuesday: 'Tuesday',
+  Wednesday: 'Wednesday',
+  Thursday: 'Thursday',
+  Friday: 'Friday',
+  Saturday: 'Saturday',
+  Sunday: 'Sunday',
+
+  'Visits': 'Visits',
+  'Registration volume': 'The number of registered users',
 }

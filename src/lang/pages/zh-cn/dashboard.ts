@@ -13,4 +13,16 @@ export default {
   'Number of attachments Uploaded': '附件上传量',
   'Total number of members': '会员总数',
   'Number of installed plug-ins': '已装插件数',
+
+  // week
+  Monday: '周一',
+  Tuesday: '周二',
+  Wednesday: '周三',
+  Thursday: '周四',
+  Friday: '周五',
+  Saturday: '周六',
+  Sunday: '周日',
+
+  'Visits': '访问量',
+  'Registration volume': '注册量',
 }
