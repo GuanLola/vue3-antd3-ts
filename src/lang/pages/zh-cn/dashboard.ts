@@ -37,5 +37,21 @@ export default {
 
   'Good code': '妙码生花',
   'Joined us': '加入了我们',
-  'Minutes ago': '分钟前'
+  'Minutes ago': '分钟前',
+  'New members': '刚刚加入的会员',
+  'Member of the source': '会员来源',
+
+  'reindeer': '驯鹿',
+  'rocket': '火箭',
+  'plane': '飞机',
+  'railway': '高铁',
+  'ship': '轮船',
+  'car': '汽车',
+  'running': '跑步',
+  'walking': '步行',
+
+  'Member last name': '会员姓氏',
+  'Statistics of the same name': '同名数量统计',
+  'A fabrication': '纯属虚构',
+  '姓名': '姓名'
 }

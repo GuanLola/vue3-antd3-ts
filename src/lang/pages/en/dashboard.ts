@@ -37,5 +37,21 @@ export default {
 
   'Good code': 'Good code',
   'Joined us': 'Joined us',
-  'Minutes ago': ' minutes ago'
+  'Minutes ago': ' minutes ago',
+  'New members': 'New members',
+  'Member of the source': 'Member of the source',
+
+  'reindeer': 'reindeer',
+  'rocket': 'rocket',
+  'plane': 'plane',
+  'railway': 'railway',
+  'ship': 'ship',
+  'car': 'car',
+  'running': 'running',
+  'walking': 'walking',
+
+  'Member last name': 'Member last name',
+  'Statistics of the same name': 'Statistics of the same name',
+  'A fabrication': 'A fabrication',
+  'name': 'name'
 }
