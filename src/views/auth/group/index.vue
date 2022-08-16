@@ -1,10 +1,13 @@
 <template>
   <div>
-    指令权限
+    auth
   </div>
 </template>
 
-<script lang="ts" setup>
+<script>
+export default {
+  name: ''
+}
 </script>
 <style lang='scss' scoped>
 </style>

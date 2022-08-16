@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import table from './modules/table' // table modules
+import auth from './modules/auth' // table modules
 const Layout = () => import('@/layout/index.vue')
 
 export const constantRoutes: RouteRecordRaw[] = [
@@ -32,37 +33,8 @@ export const constantRoutes: RouteRecordRaw[] = [
 ]
 
 export const asyncRoutes: RouteRecordRaw[] = [
-  {
-    path: '/permission',
-    name: 'Permission',
-    redirect: '/permission/index',
-    component: Layout,
-    meta: {
-      title: '权限管理',
-      icon: 'HddOutlined',
-      roles: ['admin', 'editor'], // you can set roles in root nav
-      alwaysShow: true // will always show the root menu
-    },
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/permission/index.vue'),
-        name: 'PermissionIndex',
-        meta: {
-          title: '权限管理',
-          roles: ['admin'] // or you can only set roles in sub nav
-        }
-      },
-      {
-        path: 'directive',
-        component: () => import('@/views/permission/directive.vue'),
-        name: 'PermissionDirective',
-        meta: {
-          title: '指令权限'
-        }
-      }
-    ]
-  },
+  /* 权限管理 */
+  { ...auth },
   // 列表页
   { ...table },
   {
