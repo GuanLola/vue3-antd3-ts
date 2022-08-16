@@ -23,6 +23,19 @@ export default {
   Saturday: 'Saturday',
   Sunday: 'Sunday',
 
+  month: 'month',
+
   'Visits': 'Visits',
   'Registration volume': 'The number of registered users',
+  'Membership growth': 'Membership growth',
+  'Annex growth': 'Annex Growth',
+
+  picture: 'picture',
+  file: 'file',
+  form: 'form',
+  'Compressed package': 'Compressed package',
+
+  'Good code': 'Good code',
+  'Joined us': 'Joined us',
+  'Minutes ago': ' minutes ago'
 }

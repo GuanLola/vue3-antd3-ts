@@ -48,8 +48,29 @@
     <div class="growth-chart">
       <a-row :gutter="24">
         <a-col class="lg-mb-20" :xs="24" :sm="24" :md="12" :lg="9">
-          <a-card title="会员增长情况">
+          <a-card :title="t('dashboard.Membership growth')">
             <div class="user-growth-chart" :ref="chartRefs.set"></div>
+          </a-card>
+        </a-col>
+
+        <a-col class="lg-mb-20" :xs="24" :sm="24" :md="12" :lg="9">
+          <a-card :title="t('dashboard.Annex growth')">
+            <div class="file-growth-chart" :ref="chartRefs.set"></div>
+          </a-card>
+        </a-col>
+
+        <a-col :xs="24" :sm="24" :md="24" :lg="6">
+          <a-card class="new-user-card" shadow="hover" :title="'刚刚加入的会员'">
+            <div class="new-user-growth">
+              <div v-for="item in 10" class="new-user-item">
+                <img class="new-user-avatar" src="~assets/images/login-header.png" alt="" />
+                <div class="new-user-base">
+                  <div class="new-user-name">{{ t('dashboard.Good code') }}</div>
+                  <div class="new-user-time">{{ t('dashboard.Joined us') }} <span>12{{ t('dashboard.Minutes ago') }}</span></div>
+                </div>
+                <i class="new-user-arrow fa fa-angle-right"></i>
+              </div>
+            </div>
           </a-card>
         </a-col>
       </a-row>
@@ -118,6 +139,7 @@ const state = reactive({
 onMounted(() => {
   startWork()
   initUserGrowthChart()
+  initFileGrowthChart()
   window.addEventListener('resize', echartsResize)
 })
 
@@ -256,7 +278,74 @@ const initUserGrowthChart = () => {
   state.charts.push(userGrowthChart)
 }
 
+const initFileGrowthChart = () => {
+  const fileGrowthChart = echarts.init(chartRefs.value[1] as HTMLElement)
+  const option = {
+    tooltip: {
+      trigger: 'item'
+    },
+    legend: {
+      type: 'scroll',
+      bottom: 15,
+      data: (function () {
+        var list = []
+        for (var i = 1; i <=12; i++) {
+          list.push(i + t('dashboard.month'))
+        }
+        return list
+      })()
+    },
+    visualMap: {
+      top: 'middle',
+      right: 10,
+      color: ['red', 'yellow'],
+      calculable: true
+    },
+    radar: {
+      indicator: [
+        { name: t('dashboard.picture') },
+        { name: t('dashboard.file') },
+        { name: t('dashboard.form') },
+        { name: t('dashboard.Compressed package') },
+      ]
+    },
+    series: (function () {
+      var series = [];
+      for (var i = 1; i <= 28; i++) {
+        series.push({
+          type: 'radar',
+          symbol: 'none',
+          lineStyle: {
+            width: 1
+          },
+          emphasis: {
+            areaStyle: {
+              color: 'rgba(0,250,0,0.3)'
+            }
+          },
+          data: [
+            {
+              value: [(40 - i) * 10, (38 - i) * 4 + 60, i * 5 + 10, i * 20],
+              name: i + t('dashboard.month')
+            }
+          ]
+        });
+      }
+      return series;
+    })()
+  }
+
+  fileGrowthChart.setOption(option)
+  state.charts.push(fileGrowthChart)
+}
+
 </script>
+
+<style>
+.ant-card-body {
+  overflow-y: scroll;
+}
+</style>
 
 <style lang='scss' scoped>
 .welcome {
@@ -404,5 +493,46 @@ const initUserGrowthChart = () => {
 
 .user-growth-chart {
   height: 260px;
+}
+
+.file-growth-chart {
+  height: 260px;
+}
+
+.new-user-growth {
+  height: 259px;
+
+  .new-user-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    margin: 0 0 20px 0;
+
+    .new-user-avatar {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+    }
+    .new-user-base {
+      margin-left: 15px;
+      color: #2c3f5d;
+      .new-user-name {
+        font-size: 13px;
+      }
+      .new-user-time {
+        font-size: 13px;
+        span {
+          font-size: 12px;
+          color: #8595F4;
+        }
+      }
+    }
+    .new-user-arrow {
+      margin-left: auto;
+      color: #8595F4;
+      font-size: 26px;
+    }
+  }
 }
 </style>

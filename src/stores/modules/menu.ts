@@ -6,7 +6,7 @@ export const useMenuStore = defineStore({
   id: "menu",
   state: () => {
     return {
-      collapsed: collapsed.getCollapsed() || false
+      collapsed: collapsed.getCollapsed() ? Boolean(collapsed.getCollapsed()) : false
     }
   },
   actions: {

@@ -4,7 +4,6 @@
       <img src="@/assets/images/logo.png" alt="" />
       <span v-show="!collapsed">WE创作平台</span>
     </div>
-
     <a-menu
       mode="inline"
       theme="dark"

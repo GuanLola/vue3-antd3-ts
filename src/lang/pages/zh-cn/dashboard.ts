@@ -23,6 +23,19 @@ export default {
   Saturday: '周六',
   Sunday: '周日',
 
+  month: '月',
+
   'Visits': '访问量',
   'Registration volume': '注册量',
+  'Membership growth': '会员增长情况',
+  'Annex growth': '附件增长情况',
+
+  picture: '图片',
+  file: '文档',
+  form: '表格',
+  'Compressed package': '压缩包',
+
+  'Good code': '妙码生花',
+  'Joined us': '加入了我们',
+  'Minutes ago': '分钟前'
 }
