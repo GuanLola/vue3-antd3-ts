@@ -35,7 +35,7 @@
     <div class="small-panel-box">
       <a-row :gutter="24">
         <a-col
-          v-for="item in state.panelArray"
+          v-for="(item, key) in state.panelArray"
           :xs="24"
           :sm="24"
           :md="24"
@@ -52,7 +52,7 @@
                 <span class="icon-span">
                   <i :class="iconClass(item.icon)"></i>
                 </span>
-                <span class="user_reg_number">{{ filterNum(item.num) }}</span>
+                <span :id="'number' + key">{{ item.num }}</span>
               </div>
               <div class="content-right">+{{ item.percent }}%</div>
             </div>
@@ -129,14 +129,14 @@ import { useI18n } from 'vue-i18n'
 import { loadLang } from '@/lang/index'
 import { useUserStore } from '@/stores/modules/user'
 import { getGreet } from '@/utils/common.ts'
-import { reactive, onMounted } from 'vue'
+import { reactive, onMounted, nextTick } from 'vue'
 import { Local } from '@/utils/storage.ts'
 import { WORKING_TIME } from '@/stores/constant/cacheKey.ts'
 import { start } from 'nprogress'
 import moment from 'moment'
 import { useTemplateRefsList } from '@vueuse/core'
 import * as echarts from 'echarts'
-import { nextTick } from 'process'
+import { CountUp } from 'countup.js'
 
 const chartRefs = useTemplateRefsList<HTMLDivElement>()
 
@@ -182,6 +182,7 @@ const state = reactive({
 
 onMounted(() => {
   startWork()
+  initCountUp()
   initUserGrowthChart()
   initFileGrowthChart()
   initUserSourceChart()
@@ -194,6 +195,26 @@ const echartsResize = () => {
   nextTick(() => {
     for (const key in state.charts) {
       state.charts[key].resize()
+    }
+  })
+}
+
+const initCountUp = () => {
+  nextTick(() => {
+    state.panelArray.map((v, k) => {
+      countUpFun('number' + k)
+    })
+  })
+}
+
+const countUpFun = (id) => {
+  nextTick(() => {
+    let value = document.getElementById(id)?.innerText
+    if (value) {
+      new CountUp(id, parseInt(value), {
+        startVal: 0,
+        duration: 3
+      }).start()
     }
   })
 }
